@@ -2,15 +2,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
-  font-size: 32px;
-  font-weight: 700;
+  margin: 0;
+  padding: 0;
 }
 
 .main {
-  width: 300px;
-  height: 300px;
-  margin: 30px;
+  width: 246px;
+  height: 156px;
   background-color: black;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -18,9 +16,34 @@ body {
 }
 
 .main>div {
+  width: 80px;
+  height: 50px;
   background-color: white;
   margin: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  color: black;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.info-turn-restart {
+  margin-left: 1em;
+}
+
+.turn-message {
+  font-size: 30px;
+  font-weight: 800;
+  color: blue;
+}
+
+.restart {
+  cursor: pointer;
+  background-color: rgb(85, 84, 84);
+  color: white;
+  border: none;
+  font-size: 18px;
+  padding: 8px;
 }
