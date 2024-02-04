@@ -1,11 +1,12 @@
 const allValueBox = document.querySelectorAll(".value-box");
-// console.log("all value boxes ", allValue)  //array list 
 const valueDOM = document.querySelectorAll(".value");
 const turnMessageDOM = document.querySelector(".turn-message");
 const restartDOM = document.querySelector(".restart");
+const lineDOM = document.querySelector(".line");
 
-let playerTurn = "0";
+let playerTurn = "x";
 let gameOver = false;
+let playerClickValue = 0;
 
 function updatePlayerTurn() {
   return playerTurn === "x" ? "0" : "x";
@@ -13,49 +14,59 @@ function updatePlayerTurn() {
 
 function checkWin() {
   let winConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
+    [0, 1, 2, 170, 293, 0],
+    [3, 4, 5, 232, 293, 0],//top left rotate
+    [6, 7, 8, 292, 293, 0],
+    [0, 3, 6, 235, 231, 90],
+    [1, 4, 7, 235, 292, 90],
+    [2, 5, 8, 235, 355, 90],
+    [0, 4, 8, 233, 292, 45],
+    [2, 4, 6, 233, 292, -45],
   ];
 
   winConditions.forEach(condition => {
-    // console.log("check", valueDOM[condition[0]].innerText, valueDOM[condition[1]].innerText, valueDOM[condition[2]].innerText)
     if ((valueDOM[condition[0]].innerText !== "") && (valueDOM[condition[0]].innerText === valueDOM[condition[1]].innerText) && (valueDOM[condition[1]].innerText === valueDOM[condition[2]].innerText)) {
       turnMessageDOM.innerText = valueDOM[condition[0]].innerText + " won the match."
-      // console.log(valueDOM[condition[0]].innerText, 'wooon')
+      console.log(condition[3], condition[4], condition[5])
+      lineDOM.style.width = "180px";
+      lineDOM.style.height = "2px";
+      lineDOM.style.top = `${condition[3]}px`;
+      lineDOM.style.left = `${condition[4]}px`;
+      lineDOM.style.transform = `rotate(${condition[5]}deg)`;
+      lineDOM.style.opacity = 1;
       gameOver = true;
-      playerTurn = null // for disable to click 
     }
   });
+  if (playerClickValue > 8) {
+    turnMessageDOM.innerText = "Draw the match"
+    playerClickValue = 0;
+  }
 }
 
-Array.from(allValueBox).forEach(eachBox => {
-  let value = eachBox.querySelector(".value");
-  eachBox.addEventListener("click", () => {
-    if (value.innerText === "") {
-      value.innerText = playerTurn;
-      if (!gameOver) {
+function startGame() {
+  Array.from(allValueBox).forEach(eachBox => {
+    let value = eachBox.querySelector(".value");
+    eachBox.addEventListener("click", () => {
+      if (value.innerText === "" && !gameOver) {
+        value.innerText = playerTurn;
         playerTurn = updatePlayerTurn();
         turnMessageDOM.innerText = "Turn for " + playerTurn;
+        playerClickValue += 1;
+        checkWin();
       }
-      checkWin();
-      restartGame();
-    }
-  })
-})
-
-function restartGame() {
-  restartDOM.addEventListener("click", () => {
-    turnMessageDOM.innerText = ""
-    Array.from(valueDOM).forEach(value => {
-      value.innerText = "";
-      // playerTurn = "";
     })
-    gameOver = false
   })
 }
+startGame();
+
+
+restartDOM.addEventListener("click", () => {
+  turnMessageDOM.innerText = ""
+  Array.from(valueDOM).forEach(value => {
+    value.innerText = "";
+    playerTurn = updatePlayerTurn();
+  })
+  lineDOM.style.opacity = 0;
+  gameOver = false
+})
+
