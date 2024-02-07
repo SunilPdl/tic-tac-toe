@@ -37,10 +37,9 @@ function checkWin() {
       gameOver = true;
     }
   });
-  if (playerClickValue > 8) {
-    turnMessageDOM.innerText = "Draw the match"
-    playerClickValue = 0;
-  }
+}
+if (playerClickValue > 8 && gameOver !== true) {
+  turnMessageDOM.innerText = "Draw the match"
 }
 
 function startGame() {
