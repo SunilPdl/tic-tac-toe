@@ -14,19 +14,19 @@ function updatePlayerTurn() {
 
 function checkWin() {
   let winConditions = [
-    [0, 1, 2, 170, 293, 0],
-    [3, 4, 5, 232, 293, 0],//top left rotate
-    [6, 7, 8, 292, 293, 0],
-    [0, 3, 6, 235, 231, 90],
-    [1, 4, 7, 235, 292, 90],
-    [2, 5, 8, 235, 355, 90],
-    [0, 4, 8, 233, 292, 45],
-    [2, 4, 6, 233, 292, -45],
+    [0, 1, 2, 33, 4, 0],
+    [3, 4, 5, 93, 4, 0],//top left rotate
+    [6, 7, 8, 158, 4, 0],
+    [0, 3, 6, 92, -59, 90],
+    [1, 4, 7, 92, 3, 90],
+    [2, 5, 8, 92, 66, 90],
+    [0, 4, 8, 91, 3, 45],
+    [2, 4, 6, 94, 3, -45],
   ];
 
   winConditions.forEach(condition => {
     if ((valueDOM[condition[0]].innerText !== "") && (valueDOM[condition[0]].innerText === valueDOM[condition[1]].innerText) && (valueDOM[condition[1]].innerText === valueDOM[condition[2]].innerText)) {
-      turnMessageDOM.innerText = valueDOM[condition[0]].innerText + " won the match."
+      turnMessageDOM.innerText = valueDOM[condition[0]].innerText + " won"
       console.log(condition[3], condition[4], condition[5])
       lineDOM.style.width = "180px";
       lineDOM.style.height = "2px";
@@ -67,6 +67,7 @@ restartDOM.addEventListener("click", () => {
     playerTurn = updatePlayerTurn();
   })
   lineDOM.style.opacity = 0;
+  playerClickValue = 0;
   gameOver = false
 })
 
