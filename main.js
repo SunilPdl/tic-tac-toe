@@ -38,9 +38,6 @@ function checkWin() {
     }
   });
 }
-if (playerClickValue > 8 && gameOver !== true) {
-  turnMessageDOM.innerText = "Draw the match"
-}
 
 function startGame() {
   Array.from(allValueBox).forEach(eachBox => {
@@ -51,6 +48,10 @@ function startGame() {
         playerTurn = updatePlayerTurn();
         turnMessageDOM.innerText = "Turn for " + playerTurn;
         playerClickValue += 1;
+        if (playerClickValue > 8 && gameOver !== true) {
+          turnMessageDOM.innerText = "Draw the match"
+          playerClickValue = 0;
+        }
         checkWin();
       }
     })
