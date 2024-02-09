@@ -68,6 +68,7 @@ restartDOM.addEventListener("click", () => {
   })
   lineDOM.style.opacity = 0;
   playerClickValue = 0;
-  gameOver = false
+  playerTurn = "x"
+  gameOver = false;
 })
 
