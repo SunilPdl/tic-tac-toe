@@ -61,7 +61,7 @@ startGame();
 
 
 restartDOM.addEventListener("click", () => {
-  turnMessageDOM.innerText = ""
+  turnMessageDOM.innerText = "Turn for x"
   Array.from(valueDOM).forEach(value => {
     value.innerText = "";
     playerTurn = updatePlayerTurn();
